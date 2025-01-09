@@ -16,7 +16,7 @@ const likeRoute = require("./routes/likeRoute");
 dotenv.config();
 
 const app = express();
-const PORT = 8080;
+// const PORT = 8081;
 app.use(cors());
 app.use(express.json());
 
@@ -151,10 +151,6 @@ app.post("/post/like", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`your server is running on ${PORT}`);
-});
-
 app.post("/post/user", async (req, res) => {
   const { userId } = req.body;
   try {
@@ -169,6 +165,9 @@ app.post("/post/user", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`your server is running on ${PORT}`);
+const port = process.env.PORT || 8081; // Change to a different port if needed
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
+
+console.log("aa8081");
