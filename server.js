@@ -78,6 +78,24 @@ app.get("/getProfileId/:userId", async (req, res) => {
   }
 });
 
+app.get("/posts", authMiddleware, async (req, res) => {
+  try {
+    const posts = await postModel
+      .find()
+      .populate(
+        "userId",
+        "username profileImage",
+        " bio",
+        " posts",
+        "following",
+        "followers"
+      );
+    res.json(posts);
+  } catch (error) {
+    res.status(404).json({ message: `failed to get posts, ${error}` });
+  }
+});
+
 app.post("/signup", async (req, res) => {
   const { username, password, email, profileImage } = req.body;
   const saltRound = 10;
