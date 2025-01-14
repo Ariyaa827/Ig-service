@@ -62,7 +62,15 @@ app.get("/getProfileId/:userId", async (req, res) => {
       .find({
         userId,
       })
-      .populate("userId", "profileImage");
+      .populate(
+        "userId",
+        "profileImage",
+        " username",
+        " bio",
+        " posts",
+        "following",
+        "followers"
+      );
 
     return res.send(users);
   } catch (error) {
@@ -165,7 +173,7 @@ app.post("/post/user", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 8081; // Change to a different port if needed
+const port = process.env.PORT || 8081;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
